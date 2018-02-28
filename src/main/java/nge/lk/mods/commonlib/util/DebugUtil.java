@@ -62,7 +62,7 @@ public class DebugUtil {
      *
      * @param msg The message to log.
      */
-    private static void warn(final String msg) {
+    public static void warn(final String msg) {
         log.log(Level.WARN, msg);
     }
 
