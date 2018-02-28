@@ -26,7 +26,7 @@ public class InputElement extends BaseElement {
     public InputElement(final Positioning positioning) {
         super(positioning, 3, 5);
 
-        textField = new GuiTextField(0, Minecraft.getMinecraft().fontRenderer, 0, 0, 0,
+        textField = new GuiTextField(0, Minecraft.getMinecraft().fontRendererObj, 0, 0, 0,
                 0);
     }
 
@@ -34,8 +34,8 @@ public class InputElement extends BaseElement {
     public void fixPosition(final int x, final int y) {
         super.fixPosition(x, y);
 
-        textField.x = x;
-        textField.y = y;
+        textField.xPosition = x;
+        textField.yPosition = y;
     }
 
     @Override

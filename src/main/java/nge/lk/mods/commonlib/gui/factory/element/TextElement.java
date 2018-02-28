@@ -52,7 +52,7 @@ public class TextElement extends BaseElement {
     public int getHorizontalBuffer() {
         // As the element has no width in its positioning, measurements of its size are taken into account for the
         // horizontal buffer.
-        final FontRenderer fontRenderer = Minecraft.getMinecraft().fontRenderer;
+        final FontRenderer fontRenderer = Minecraft.getMinecraft().fontRendererObj;
         return fontRenderer.getStringWidth(caption) + 5;
     }
 }

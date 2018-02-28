@@ -53,8 +53,8 @@ public class SliderElement extends BaseElement {
     public void fixPosition(final int x, final int y) {
         super.fixPosition(x, y);
 
-        slider.x = x;
-        slider.y = y;
+        slider.xPosition = x;
+        slider.yPosition = y;
     }
 
     @Override
