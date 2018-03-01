@@ -3,7 +3,7 @@ package nge.lk.mods.commonlib.gui;
 import net.minecraft.client.gui.GuiScreen;
 import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.client.renderer.Tessellator;
-import net.minecraft.client.renderer.VertexBuffer;
+import net.minecraft.client.renderer.WorldRenderer;
 import net.minecraft.client.renderer.vertex.DefaultVertexFormats;
 import net.minecraft.util.ResourceLocation;
 import nge.lk.mods.commonlib.gui.factory.GuiFactory;
@@ -209,14 +209,12 @@ public class GuiColorPicker extends GuiFactory implements Consumer<ButtonElement
         GlStateManager.disableTexture2D();
         GlStateManager.disableAlpha();
         GlStateManager.enableBlend();
-        GlStateManager.tryBlendFuncSeparate(GlStateManager.SourceFactor.SRC_ALPHA,
-                GlStateManager.DestFactor.ONE_MINUS_SRC_ALPHA, GlStateManager.SourceFactor.ONE,
-                GlStateManager.DestFactor.ZERO);
+        GlStateManager.tryBlendFuncSeparate(GL11.GL_SRC_ALPHA, GL11.GL_ONE_MINUS_SRC_ALPHA, GL11.GL_ONE, GL11.GL_ZERO);
         GlStateManager.shadeModel(GL11.GL_SMOOTH);
 
         // Draw the gradient rect.
         final Tessellator tessellator = Tessellator.getInstance();
-        final VertexBuffer bufferbuilder = tessellator.getBuffer();
+        final WorldRenderer bufferbuilder = tessellator.getWorldRenderer();
         bufferbuilder.begin(GL11.GL_QUADS, DefaultVertexFormats.POSITION_COLOR);
         bufferbuilder.pos((double) right, (double) top, (double) zLevel)
                 .color(endRed, endGreen, endBlue, endAlpha).endVertex();
