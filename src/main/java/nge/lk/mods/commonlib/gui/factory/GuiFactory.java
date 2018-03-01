@@ -164,10 +164,10 @@ public abstract class GuiFactory extends GuiScreen {
 
             // Add buttons/sliders to GuiScreen's internal rendering list.
             if (element instanceof ButtonElement) {
-                super.addButton(((ButtonElement) element).getButton());
+                buttonList.add(((ButtonElement) element).getButton());
             }
             if (element instanceof SliderElement) {
-                super.addButton(((SliderElement) element).getSlider());
+                buttonList.add(((SliderElement) element).getSlider());
             }
         }
 
