@@ -49,8 +49,8 @@ public class ButtonElement extends BaseElement {
     public void fixPosition(final int x, final int y) {
         super.fixPosition(x, y);
 
-        button.x = x;
-        button.y = y;
+        button.xPosition = x;
+        button.yPosition = y;
     }
 
     @Override
@@ -58,7 +58,7 @@ public class ButtonElement extends BaseElement {
         super.fixDimensions(globalWidth, globalHeight);
 
         // 8 + display string width: Minimum size for a button with a buffer of 4 units to either side.
-        width = Math.max(width, 8 + Minecraft.getMinecraft().fontRenderer.getStringWidth(button.displayString));
+        width = Math.max(width, 8 + Minecraft.getMinecraft().fontRendererObj.getStringWidth(button.displayString));
 
         button.width = width;
         button.height = height;

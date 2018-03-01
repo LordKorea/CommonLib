@@ -81,10 +81,10 @@ public abstract class GuiFactory extends GuiScreen {
         // Draw the text elements.
         for (final TextElement element : textElements) {
             if (element.getPositioning().isCentered()) {
-                drawCenteredString(fontRenderer, element.getCaption(), width / 2, element.getFixedY(),
+                drawCenteredString(fontRendererObj, element.getCaption(), width / 2, element.getFixedY(),
                         element.getColor());
             } else {
-                drawString(fontRenderer, element.getCaption(), element.getFixedX(), element.getFixedY(),
+                drawString(fontRendererObj, element.getCaption(), element.getFixedX(), element.getFixedY(),
                         element.getColor());
             }
         }
