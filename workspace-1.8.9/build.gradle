@@ -18,7 +18,7 @@ plugins {
 apply plugin: 'net.minecraftforge.gradle.forge'
 apply plugin: 'maven-publish'
 
-version = "1.0.0-1.8.9.2318"
+version = "1.0.1-1.8.9.2318"
 group = "nge.lk.mods.commonlib"
 archivesBaseName = "commonlib"
 
@@ -41,7 +41,7 @@ publishing {
 
             groupId 'nge.lk.mods.commonlib'
             artifactId 'commonlib'
-            version '1.0.0-1.8.9.2318'
+            version '1.0.1-1.8.9.2318'
         }
     }
 }
