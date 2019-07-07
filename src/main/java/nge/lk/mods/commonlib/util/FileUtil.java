@@ -48,7 +48,7 @@ public final class FileUtil {
                                        final BiFunction<Integer, String, String> versionConverter) throws IOException {
         ensureFileExists(file);
 
-        try (BufferedReader reader = new BufferedReader(new FileReader(file))) {
+        try (final BufferedReader reader = new BufferedReader(new FileReader(file))) {
             // The first line of line storage files contains a version number.
             final String versionLine = reader.readLine();
             if (versionLine == null) {
@@ -87,7 +87,7 @@ public final class FileUtil {
             throws IOException {
         ensureFileExists(file);
 
-        try (BufferedWriter writer = new BufferedWriter(new FileWriter(file))) {
+        try (final BufferedWriter writer = new BufferedWriter(new FileWriter(file))) {
             // Write the version number line.
             writer.write(Integer.toString(version));
             writer.write('\n');

@@ -12,16 +12,19 @@ public class Positioning {
     /**
      * Coordinate unit type hasn't be assigned.
      */
+    @Deprecated
     public static final int UNIT_UNASSIGNED = 0;
 
     /**
      * Relative coordinates, i.e. a percentage of the window dimension.
      */
+    @Deprecated
     public static final int UNIT_RELATIVE = 1;
 
     /**
      * Absolute coordinates, i.e. in screen units.
      */
+    @Deprecated
     public static final int UNIT_ABSOLUTE = 2;
 
     /**
@@ -47,12 +50,12 @@ public class Positioning {
     /**
      * Whether this positioning uses relative or absolute width.
      */
-    private int widthUnitType = UNIT_UNASSIGNED;
+    private PositioningUnit widthUnitType = PositioningUnit.UNASSIGNED;
 
     /**
      * Whether this positioning uses relative or absolute height.
      */
-    private int heightUnitType = UNIT_UNASSIGNED;
+    private PositioningUnit heightUnitType = PositioningUnit.UNASSIGNED;
 
     /**
      * The width (relative or absolute) of this positioning.
@@ -119,8 +122,8 @@ public class Positioning {
      * @return {@code this}, for chaining.
      */
     public Positioning relativeHeight(final int height) {
-        assert heightUnitType == UNIT_UNASSIGNED : "can't reassign unit type";
-        heightUnitType = UNIT_RELATIVE;
+        assert heightUnitType == PositioningUnit.UNASSIGNED : "can't reassign unit type";
+        heightUnitType = PositioningUnit.RELATIVE;
         this.height = height;
         return this;
     }
@@ -133,8 +136,8 @@ public class Positioning {
      * @return {@code this}, for chaining.
      */
     public Positioning absoluteHeight(final int height) {
-        assert heightUnitType == UNIT_UNASSIGNED : "can't reassign unit type";
-        heightUnitType = UNIT_ABSOLUTE;
+        assert heightUnitType == PositioningUnit.UNASSIGNED : "can't reassign unit type";
+        heightUnitType = PositioningUnit.ABSOLUTE;
         this.height = height;
         return this;
     }
@@ -147,8 +150,8 @@ public class Positioning {
      * @return {@code this}, for chaining.
      */
     public Positioning relativeWidth(final int width) {
-        assert widthUnitType == UNIT_UNASSIGNED : "can't reassign unit type";
-        widthUnitType = UNIT_RELATIVE;
+        assert widthUnitType == PositioningUnit.UNASSIGNED : "can't reassign unit type";
+        widthUnitType = PositioningUnit.RELATIVE;
         this.width = width;
         return this;
     }
@@ -161,8 +164,8 @@ public class Positioning {
      * @return {@code this}, for chaining.
      */
     public Positioning absoluteWidth(final int width) {
-        assert widthUnitType == UNIT_UNASSIGNED : "can't reassign unit type";
-        widthUnitType = UNIT_ABSOLUTE;
+        assert widthUnitType == PositioningUnit.UNASSIGNED : "can't reassign unit type";
+        widthUnitType = PositioningUnit.ABSOLUTE;
         this.width = width;
         return this;
     }
@@ -175,7 +178,7 @@ public class Positioning {
      * @return The effective height.
      */
     public int getHeight(final int globalHeight) {
-        if (heightUnitType == UNIT_ABSOLUTE) {
+        if (heightUnitType == PositioningUnit.ABSOLUTE) {
             return height;
         }
         return (height * globalHeight) / 100;
@@ -189,7 +192,7 @@ public class Positioning {
      * @return The effective width.
      */
     public int getWidth(final int globalWidth) {
-        if (widthUnitType == UNIT_ABSOLUTE) {
+        if (widthUnitType == PositioningUnit.ABSOLUTE) {
             return width;
         }
         return (width * globalWidth) / 100;
@@ -201,6 +204,26 @@ public class Positioning {
      * @return {@code true} iff there are relative dimensions in this positioning.
      */
     public boolean hasRelativeDimensions() {
-        return widthUnitType == UNIT_RELATIVE || heightUnitType == UNIT_RELATIVE;
+        return widthUnitType == PositioningUnit.RELATIVE || heightUnitType == PositioningUnit.RELATIVE;
+    }
+
+    /**
+     * Represents possible positioning units.
+     */
+    private enum PositioningUnit {
+        /**
+         * An unassigned unit.
+         */
+        UNASSIGNED,
+
+        /**
+         * Relative units (percentage).
+         */
+        RELATIVE,
+
+        /**
+         * Absolute units (scaled pixels).
+         */
+        ABSOLUTE
     }
 }
