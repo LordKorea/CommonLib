@@ -44,10 +44,11 @@ public class Button extends BaseElement {
     @Override
     public void prepareRender(final RenderContext ctx) {
         super.prepareRender(ctx);
+        button.id = ctx.getButtonIdSupplier().getAsInt();
+
         ctx.getMinecraftButtonRegistration().accept(button);
         ctx.getButtonRegistration().accept(this);
 
-        button.id = ctx.getButtonIdSupplier().getAsInt();
         button.x = positionX;
         button.y = positionY;
         button.width = width;
