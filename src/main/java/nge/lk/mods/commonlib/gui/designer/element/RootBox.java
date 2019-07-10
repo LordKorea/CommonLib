@@ -1,5 +1,7 @@
 package nge.lk.mods.commonlib.gui.designer.element;
 
+import nge.lk.mods.commonlib.gui.designer.RenderProperties;
+import nge.lk.mods.commonlib.gui.designer.util.Alignment;
 import nge.lk.mods.commonlib.gui.designer.util.Dimension;
 import nge.lk.mods.commonlib.gui.designer.util.RequestedSize;
 
@@ -12,7 +14,8 @@ public class RootBox extends Box {
      * Constructor.
      */
     public RootBox() {
-        super(null, new RequestedSize(Dimension.relative(100), Dimension.relative(100)));
+        super(new RenderProperties(false, false,
+                new RequestedSize(Dimension.relative(100), Dimension.relative(100)), Alignment.TOP));
     }
 
     @Override

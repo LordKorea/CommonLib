@@ -9,13 +9,6 @@ import nge.lk.mods.commonlib.gui.designer.RenderProperties;
 public interface Element {
 
     /**
-     * Returns the parent element.
-     *
-     * @return The parent element.
-     */
-    Element getParent();
-
-    /**
      * Updates the global x position of this element.
      *
      * @param x The x position.
@@ -30,7 +23,21 @@ public interface Element {
     void setPositionY(int y);
 
     /**
-     * Updates the global with of this element.
+     * Obtains the global x position of this element.
+     *
+     * @return The global x position.
+     */
+    int getPositionX();
+
+    /**
+     * Obtains the global y position of this element.
+     *
+     * @return The global y position.
+     */
+    int getPositionY();
+
+    /**
+     * Updates the global width of this element.
      *
      * @param width The width.
      */
