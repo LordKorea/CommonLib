@@ -6,6 +6,7 @@ import nge.lk.mods.commonlib.gui.designer.element.Box;
 import nge.lk.mods.commonlib.gui.designer.element.Button;
 import nge.lk.mods.commonlib.gui.designer.element.Label;
 import nge.lk.mods.commonlib.gui.designer.element.RootBox;
+import nge.lk.mods.commonlib.gui.designer.element.TextField;
 import org.lwjgl.input.Keyboard;
 
 import java.io.IOException;
@@ -34,19 +35,20 @@ public abstract class GuiDesigner extends GuiScreen {
      */
     private final List<Label> labels = new ArrayList<>();
 
+    /**
+     * The text fields in this GUI.
+     */
+    private final List<TextField> textFields = new ArrayList<>();
+
     @Override
     public void drawScreen(final int mouseX, final int mouseY, final float partialTicks) {
         drawDefaultBackground();
 
         // Draw the labels in this GUI.
-        for (final Label label : labels) {
-            drawString(fontRenderer, label.getCaption(), label.getPositionX(), label.getPositionY(), label.getColor());
-        }
+        labels.forEach(l -> drawString(fontRenderer, l.getCaption(), l.getPositionX(), l.getPositionY(), l.getColor()));
 
         // Draw the input elements.
-        /*for (final InputElement element : inputElements) {
-            element.getTextField().drawTextBox(); TODO
-        }*/
+        textFields.forEach(t -> t.getTextField().drawTextBox());
 
         // Takes care of buttons etc.
         super.drawScreen(mouseX, mouseY, partialTicks);
@@ -57,10 +59,8 @@ public abstract class GuiDesigner extends GuiScreen {
         // Clear GuiScreen's button list.
         buttonList.clear();
 
-        final RenderContext ctx = new RenderContext(b -> {
-            buttonList.add(b.getButton());
-            buttons.add(b);
-        });
+        // Prepare the root box and all its children for rendering.
+        final RenderContext ctx = new RenderContext(buttonList::add, buttons::add, labels::add, textFields::add);
         root.setWidth(width);
         root.setHeight(height);
         root.prepareRender(ctx);
@@ -72,9 +72,7 @@ public abstract class GuiDesigner extends GuiScreen {
     @Override
     public void updateScreen() {
         // Update all input elements.
-        /*for (final InputElement input : inputElements) {
-            input.getTextField().updateCursorCounter(); TODO
-        }*/
+        textFields.forEach(t -> t.getTextField().updateCursorCounter());
     }
 
     @Override
@@ -93,9 +91,7 @@ public abstract class GuiDesigner extends GuiScreen {
         }
 
         // Forward key events to all input elements.
-        /*for (final InputElement element : inputElements) {
-            element.getTextField().textboxKeyTyped(typedChar, keyCode); TODO
-        }*/
+        textFields.forEach(t -> t.getTextField().textboxKeyTyped(typedChar, keyCode));
     }
 
     @Override
@@ -103,9 +99,7 @@ public abstract class GuiDesigner extends GuiScreen {
         super.mouseClicked(mouseX, mouseY, mouseButton);
 
         // Forward mouse clicks to all input elements.
-        /*for (final InputElement element : inputElements) { TODO
-            element.getTextField().mouseClicked(mouseX, mouseY, mouseButton);
-        }*/
+        textFields.forEach(t -> t.getTextField().mouseClicked(mouseX, mouseY, mouseButton));
     }
 
     @Override
