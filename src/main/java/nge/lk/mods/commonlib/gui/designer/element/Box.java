@@ -10,6 +10,8 @@ import nge.lk.mods.commonlib.gui.designer.util.Padding;
 import nge.lk.mods.commonlib.gui.designer.util.RequestedSize;
 
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collection;
 import java.util.List;
 
 /**
@@ -153,6 +155,26 @@ public class Box extends BaseElement {
                 primaryCursor += primaryAlignment.getCursorDirection() * maxPrimaryDimension;
             }
         }
+    }
+
+    /**
+     * Adds a render bucket with the specified elements.
+     *
+     * @param alignment The alignment of the render bucket.
+     * @param elements  The elements in the render bucket.
+     */
+    public void addRenderBucket(final Alignment alignment, final Collection<Element> elements) {
+        renderBuckets.add(new RenderBucket(alignment, new ArrayList<>(elements)));
+    }
+
+    /**
+     * Adds a render bucket with the specified elements.
+     *
+     * @param alignment The alignment of the render bucket.
+     * @param elements  The elements in the render bucket.
+     */
+    public void addRenderBucket(final Alignment alignment, final Element... elements) {
+        addRenderBucket(alignment, Arrays.asList(elements));
     }
 
     /**

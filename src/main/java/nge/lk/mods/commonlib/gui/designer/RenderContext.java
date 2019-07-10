@@ -8,6 +8,7 @@ import nge.lk.mods.commonlib.gui.designer.element.Label;
 import nge.lk.mods.commonlib.gui.designer.element.TextField;
 
 import java.util.function.Consumer;
+import java.util.function.IntSupplier;
 
 /**
  * Rendering context for designer GUIs.
@@ -35,4 +36,9 @@ public class RenderContext {
      * A consumer which is used for text field registration.
      */
     private final Consumer<TextField> textFieldRegistration;
+
+    /**
+     * A supplier which provides button IDs.
+     */
+    private final IntSupplier buttonIdSupplier;
 }
