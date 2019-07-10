@@ -30,23 +30,21 @@ public class Box extends BaseElement {
     /**
      * Constructor.
      *
-     * @param parent           The parent element.
      * @param renderProperties The requested render properties for the box.
      */
-    public Box(final Element parent, final RenderProperties renderProperties) {
-        this(parent, renderProperties, new Padding(Dimension.absolute(0), Dimension.absolute(0), Dimension.absolute(0),
+    public Box(final RenderProperties renderProperties) {
+        this(renderProperties, new Padding(Dimension.absolute(0), Dimension.absolute(0), Dimension.absolute(0),
                 Dimension.absolute(0)));
     }
 
     /**
      * Constructor.
      *
-     * @param parent           The parent element.
      * @param renderProperties The requested render properties for the box.
      * @param padding          The padding for the box.
      */
-    public Box(final Element parent, final RenderProperties renderProperties, final Padding padding) {
-        super(parent, renderProperties);
+    public Box(final RenderProperties renderProperties, final Padding padding) {
+        super(renderProperties);
         this.padding = padding;
     }
 
@@ -142,6 +140,9 @@ public class Box extends BaseElement {
                             secondaryCursors[cursorIdx]));
                     element.setPositionY(pickAlignmentDimension(primaryAlignment, secondaryCursors[cursorIdx],
                             primaryCursor));
+
+                    // The element is positioned, and can now be prepared for rendering itself.
+                    element.prepareRender(ctx);
 
                     // Advance the relevant secondary cursor.
                     secondaryCursors[cursorIdx] += secondaryAlignment.getCursorDirection()

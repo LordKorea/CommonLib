@@ -3,10 +3,14 @@ package nge.lk.mods.commonlib.gui.designer;
 import net.minecraft.client.gui.GuiButton;
 import net.minecraft.client.gui.GuiScreen;
 import nge.lk.mods.commonlib.gui.designer.element.Box;
+import nge.lk.mods.commonlib.gui.designer.element.Button;
+import nge.lk.mods.commonlib.gui.designer.element.Label;
 import nge.lk.mods.commonlib.gui.designer.element.RootBox;
 import org.lwjgl.input.Keyboard;
 
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Represents a custom designed GUI.
@@ -20,20 +24,24 @@ public abstract class GuiDesigner extends GuiScreen {
      */
     protected final Box root = new RootBox();
 
+    /**
+     * The buttons in this GUI.
+     */
+    private final List<Button> buttons = new ArrayList<>();
+
+    /**
+     * The labels in this GUI.
+     */
+    private final List<Label> labels = new ArrayList<>();
+
     @Override
     public void drawScreen(final int mouseX, final int mouseY, final float partialTicks) {
         drawDefaultBackground();
 
-        // Draw the text elements.
-        /*for (final TextElement element : textElements) {
-            if (element.getPositioning().isCentered()) {
-                drawCenteredString(fontRenderer, element.getCaption(), width / 2, element.getFixedY(),
-                        element.getColor());
-            } else {
-                drawString(fontRenderer, element.getCaption(), element.getFixedX(), element.getFixedY(),
-                        element.getColor()); TODO
-            }
-        }*/
+        // Draw the labels in this GUI.
+        for (final Label label : labels) {
+            drawString(fontRenderer, label.getCaption(), label.getPositionX(), label.getPositionY(), label.getColor());
+        }
 
         // Draw the input elements.
         /*for (final InputElement element : inputElements) {
@@ -49,7 +57,10 @@ public abstract class GuiDesigner extends GuiScreen {
         // Clear GuiScreen's button list.
         buttonList.clear();
 
-        final RenderContext ctx = new RenderContext(buttonList::add);
+        final RenderContext ctx = new RenderContext(b -> {
+            buttonList.add(b.getButton());
+            buttons.add(b);
+        });
         root.setWidth(width);
         root.setHeight(height);
         root.prepareRender(ctx);
@@ -101,10 +112,10 @@ public abstract class GuiDesigner extends GuiScreen {
     protected void actionPerformed(final GuiButton button) {
         // Only perform actions on enabled buttons.
         if (button.enabled) {
-            /*if (button.id < buttonElements.size() && button.id >= 0) {
-                final ButtonElement element = buttonElements.get(button.id); TODO
-                element.getButtonListener().accept(element);
-            }*/
+            if (button.id < buttons.size() && button.id >= 0) {
+                final Button btn = buttons.get(button.id);
+                btn.getButtonListener().accept(btn);
+            }
         }
     }
 
