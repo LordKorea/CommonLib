@@ -3,6 +3,7 @@ package nge.lk.mods.commonlib.gui.designer;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 import net.minecraft.client.gui.GuiButton;
+import nge.lk.mods.commonlib.gui.designer.element.Button;
 
 import java.util.function.Consumer;
 
@@ -16,5 +17,5 @@ public class RenderContext {
     /**
      * A consumer which is used for registering buttons.
      */
-    private final Consumer<GuiButton> buttonRegistration;
+    private final Consumer<Button> buttonRegistration;
 }
