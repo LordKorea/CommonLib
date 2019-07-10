@@ -1,7 +1,9 @@
 package nge.lk.mods.commonlib.gui.designer;
 
+import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
+import lombok.Setter;
 import nge.lk.mods.commonlib.gui.designer.util.Alignment;
 import nge.lk.mods.commonlib.gui.designer.util.Dimension;
 import nge.lk.mods.commonlib.gui.designer.util.RequestedSize;
@@ -10,7 +12,7 @@ import nge.lk.mods.commonlib.gui.designer.util.RequestedSize;
  * Rendering properties.
  */
 @Getter
-@RequiredArgsConstructor
+@AllArgsConstructor
 public class RenderProperties {
 
     /**
@@ -26,7 +28,7 @@ public class RenderProperties {
     /**
      * The size an element requests for itself.
      */
-    private final RequestedSize requestedSize;
+    private @Setter RequestedSize requestedSize;
 
     /**
      * The secondary alignment requested by the element.
@@ -96,6 +98,60 @@ public class RenderProperties {
          */
         public RenderPropertiesBuilder requestSize(final Dimension width, final Dimension height) {
             requestSize = new RequestedSize(width, height);
+            return this;
+        }
+
+        /**
+         * Sets the requested size to 100% relative size.
+         *
+         * @return {@code this}, for chaining.
+         */
+        public RenderPropertiesBuilder fullSize() {
+            requestSize = new RequestedSize(Dimension.relative(100), Dimension.relative(100));
+            return this;
+        }
+
+        /**
+         * Sets the relative width of the requested size.
+         *
+         * @param val The value.
+         * @return {@code this}, for chaining.
+         */
+        public RenderPropertiesBuilder relativeWidth(final int val) {
+            requestSize = new RequestedSize(Dimension.relative(val), requestSize.getHeight());
+            return this;
+        }
+
+        /**
+         * Sets the absolute width of the requested size.
+         *
+         * @param val The value.
+         * @return {@code this}, for chaining.
+         */
+        public RenderPropertiesBuilder absoluteWidth(final int val) {
+            requestSize = new RequestedSize(Dimension.absolute(val), requestSize.getHeight());
+            return this;
+        }
+
+        /**
+         * Sets the relative height of the requested size.
+         *
+         * @param val The value.
+         * @return {@code this}, for chaining.
+         */
+        public RenderPropertiesBuilder relativeHeight(final int val) {
+            requestSize = new RequestedSize(requestSize.getWidth(), Dimension.relative(val));
+            return this;
+        }
+
+        /**
+         * Sets the absolute height of the requested size.
+         *
+         * @param val The value.
+         * @return {@code this}, for chaining.
+         */
+        public RenderPropertiesBuilder absoluteHeight(final int val) {
+            requestSize = new RequestedSize(requestSize.getWidth(), Dimension.absolute(val));
             return this;
         }
 
