@@ -21,7 +21,9 @@ import java.util.function.Consumer;
  * Represents a GUI screen which can be created in easy steps without too much arithmetic hassles.
  *
  * @see GuiScreen
+ * @deprecated Use {@link nge.lk.mods.commonlib.gui.designer}
  */
+@Deprecated
 public abstract class GuiFactory extends GuiScreen {
 
     /**
@@ -242,10 +244,10 @@ public abstract class GuiFactory extends GuiScreen {
     /**
      * Sets the padding for this GUI.
      *
-     * @param percentTop The top padding, as a percentage.
-     * @param percentLeft The left padding, as a percentage.
+     * @param percentTop    The top padding, as a percentage.
+     * @param percentLeft   The left padding, as a percentage.
      * @param percentBottom The bottom padding, as a percentage.
-     * @param percentRight The right padding, as a percentage.
+     * @param percentRight  The right padding, as a percentage.
      */
     protected void setPadding(final double percentTop, final double percentLeft, final double percentBottom,
                               final double percentRight) {
@@ -268,7 +270,6 @@ public abstract class GuiFactory extends GuiScreen {
      * Adds a text element.
      *
      * @param positioning The positioning of the text element.
-     *
      * @return The created text element.
      */
     protected TextElement addText(final Positioning positioning) {
@@ -282,7 +283,6 @@ public abstract class GuiFactory extends GuiScreen {
      * Adds an input element.
      *
      * @param positioning The positioning of the input element.
-     *
      * @return The created input element.
      */
     protected InputElement addInput(final Positioning positioning) {
@@ -296,8 +296,7 @@ public abstract class GuiFactory extends GuiScreen {
      * Adds a button element.
      *
      * @param buttonListener The listener for button clicks.
-     * @param positioning The positioning of this element.
-     *
+     * @param positioning    The positioning of this element.
      * @return The created button element.
      */
     protected ButtonElement addButton(final Consumer<ButtonElement> buttonListener, final Positioning positioning) {
@@ -310,13 +309,12 @@ public abstract class GuiFactory extends GuiScreen {
     /**
      * Adds a slider element.
      *
-     * @param min The minimum slider value.
-     * @param max The maximum slider value.
-     * @param def The default slider value.
-     * @param formatter The formatter for the slider caption: {@code (Element, Value) -> Caption}.
-     * @param responder The responder for value changes.
+     * @param min         The minimum slider value.
+     * @param max         The maximum slider value.
+     * @param def         The default slider value.
+     * @param formatter   The formatter for the slider caption: {@code (Element, Value) -> Caption}.
+     * @param responder   The responder for value changes.
      * @param positioning The positioning of this element.
-     *
      * @return The created slider element.
      */
     protected SliderElement addSlider(final float min, final float max, final float def,

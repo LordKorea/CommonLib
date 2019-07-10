@@ -6,7 +6,10 @@ import nge.lk.mods.commonlib.gui.factory.Positioning;
 
 /**
  * An element for a GUI managed by the {@link nge.lk.mods.commonlib.gui.factory.GuiFactory}
+ *
+ * @deprecated Use {@link nge.lk.mods.commonlib.gui.designer}
  */
+@Deprecated
 @Getter
 @RequiredArgsConstructor
 public class BaseElement {
@@ -60,9 +63,8 @@ public class BaseElement {
     /**
      * Fixes this elements dimensions with respect to the given global width and height.
      *
-     * @param globalWidth The global width (of the window, scaled).
+     * @param globalWidth  The global width (of the window, scaled).
      * @param globalHeight The global height (of the window, scaled).
-     *
      * @see net.minecraft.client.gui.ScaledResolution
      */
     public void fixDimensions(final int globalWidth, final int globalHeight) {
