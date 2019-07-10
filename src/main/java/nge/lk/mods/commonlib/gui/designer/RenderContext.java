@@ -39,6 +39,8 @@ public class RenderContext {
 
     /**
      * A supplier which provides button IDs.
+     * <p>
+     * The button ID supplier needs to be queried before registering a button.
      */
     private final IntSupplier buttonIdSupplier;
 }
