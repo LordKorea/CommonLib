@@ -2,6 +2,7 @@ package nge.lk.mods.commonlib.gui.designer.element;
 
 import lombok.Getter;
 import lombok.Setter;
+import nge.lk.mods.commonlib.gui.designer.RenderContext;
 import nge.lk.mods.commonlib.gui.designer.RenderProperties;
 
 /**
@@ -37,5 +38,11 @@ public class Label extends BaseElement {
     public void setText(final String caption, final int color) {
         setCaption(caption);
         setColor(color);
+    }
+
+    @Override
+    public void prepareRender(final RenderContext ctx) {
+        super.prepareRender(ctx);
+        ctx.getLabelRegistration().accept(this);
     }
 }
