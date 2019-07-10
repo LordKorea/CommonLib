@@ -1,27 +1,27 @@
 package nge.lk.mods.commonlib.gui;
 
 import net.minecraft.client.gui.GuiScreen;
+import net.minecraft.client.renderer.BufferBuilder;
 import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.client.renderer.Tessellator;
-import net.minecraft.client.renderer.VertexBuffer;
 import net.minecraft.client.renderer.vertex.DefaultVertexFormats;
 import net.minecraft.util.ResourceLocation;
-import nge.lk.mods.commonlib.gui.factory.GuiFactory;
-import nge.lk.mods.commonlib.gui.factory.Positioning;
-import nge.lk.mods.commonlib.gui.factory.element.ButtonElement;
+import nge.lk.mods.commonlib.gui.designer.GuiDesigner;
+import nge.lk.mods.commonlib.gui.designer.RenderProperties;
+import nge.lk.mods.commonlib.gui.designer.element.Box;
+import nge.lk.mods.commonlib.gui.designer.element.Button;
+import nge.lk.mods.commonlib.gui.designer.element.Label;
+import nge.lk.mods.commonlib.gui.designer.util.Alignment;
+import nge.lk.mods.commonlib.gui.designer.util.Padding;
 import org.lwjgl.opengl.GL11;
 
 import java.awt.*;
 import java.io.IOException;
-import java.util.function.Consumer;
 
 /**
  * A color picker (HSV picking, converted on the fly to RGB).
- *
- * @deprecated Use {@link nge.lk.mods.commonlib.gui.ColorPickerGui}
  */
-@Deprecated
-public class GuiColorPicker extends GuiFactory implements Consumer<ButtonElement> {
+public class ColorPickerGui extends GuiDesigner {
 
     /**
      * The spectre used for hue selection. This is not easily generated using OpenGL so it is hardcoded.
@@ -35,7 +35,7 @@ public class GuiColorPicker extends GuiFactory implements Consumer<ButtonElement
     private final float[] selectedColor;
 
     /**
-     * The parent which receives the picked color. If this is a {@link GuiScreen} it will be opened after picking a
+     * The parent which receives the picked color. If this is a {@link net.minecraft.client.gui.GuiScreen} it will be opened after picking a
      * color.
      */
     private final ColorPicking parent;
@@ -44,7 +44,6 @@ public class GuiColorPicker extends GuiFactory implements Consumer<ButtonElement
      * Converts the given RGB color to a normalized HSV (HSB) array.
      *
      * @param rgb The input color.
-     *
      * @return The normalized HSV array.
      */
     private static float[] toHSV(final int rgb) {
@@ -55,7 +54,6 @@ public class GuiColorPicker extends GuiFactory implements Consumer<ButtonElement
      * Converts the given HSV array to a RGB color.
      *
      * @param hsv The HSV array.
-     *
      * @return The equivalent RGB color.
      */
     private static int fromHSV(final float[] hsv) {
@@ -66,9 +64,9 @@ public class GuiColorPicker extends GuiFactory implements Consumer<ButtonElement
      * Constructor.
      *
      * @param preset The preset color.
-     * @param parent The {@link ColorPicking} which will receive the picked color.
+     * @param parent The {@link nge.lk.mods.commonlib.gui.ColorPicking} which will receive the picked color.
      */
-    public GuiColorPicker(final int preset, final ColorPicking parent) {
+    public ColorPickerGui(final int preset, final ColorPicking parent) {
         this.parent = parent;
         selectedColor = toHSV(preset);
         createGui();
@@ -80,16 +78,16 @@ public class GuiColorPicker extends GuiFactory implements Consumer<ButtonElement
 
         // Draw the HSV labels, each label 25 pixels apart from each other, this is also the distance between the
         // HSV selectors.
-        fontRendererObj.drawString("Hue",
-                (width - 256) / 2 - fontRendererObj.getStringWidth("Hue") - 10,
+        fontRenderer.drawString("Hue",
+                (width - 256) / 2 - fontRenderer.getStringWidth("Hue") - 10,
                 height / 4 + 6,
                 0xA0A0A0);
-        fontRendererObj.drawString("Saturation",
-                (width - 256) / 2 - fontRendererObj.getStringWidth("Saturation") - 10,
+        fontRenderer.drawString("Saturation",
+                (width - 256) / 2 - fontRenderer.getStringWidth("Saturation") - 10,
                 height / 4 + 31,
                 0xA0A0A0);
-        fontRendererObj.drawString("Value",
-                (width - 256) / 2 - fontRendererObj.getStringWidth("Value") - 10,
+        fontRenderer.drawString("Value",
+                (width - 256) / 2 - fontRenderer.getStringWidth("Value") - 10,
                 height / 4 + 56,
                 0xA0A0A0);
 
@@ -123,11 +121,6 @@ public class GuiColorPicker extends GuiFactory implements Consumer<ButtonElement
     }
 
     @Override
-    public void accept(final ButtonElement buttonElement) {
-        closeGui();
-    }
-
-    @Override
     protected void mouseClicked(final int mouseX, final int mouseY, final int mouseButton) throws IOException {
         super.mouseClicked(mouseX, mouseY, mouseButton);
         updateColor(mouseX, mouseY);
@@ -135,13 +128,20 @@ public class GuiColorPicker extends GuiFactory implements Consumer<ButtonElement
 
     @Override
     protected void createGui() {
-        setPadding(0.1, 0.05, 0.2, 0.05);
+        final Box contentPane = new Box(RenderProperties.builder().fullSize().build(),
+                Padding.relative(10, 5, 20, 5));
 
-        addText(new Positioning().center().breakRow()).setText("Color Picker", 0xA0A0A0);
+        final Label label = new Label(RenderProperties.builder().centered().groupBreaking().build());
+        label.setText("Color Picker", 0xAAAAAA);
+        label.pack();
+        contentPane.addRenderBucket(Alignment.TOP, label);
 
-        final Positioning chooseButtonPosition =
-                new Positioning().alignBottom().center().relativeWidth(30).absoluteHeight(20);
-        addButton(this, chooseButtonPosition).getButton().displayString = "Choose Color";
+        final Button button = new Button(b -> closeGui(), RenderProperties.builder().relativeWidth(30).centered()
+                .absoluteHeight(20).build());
+        contentPane.addRenderBucket(Alignment.BOTTOM, button);
+        button.getButton().displayString = "Choose Color";
+
+        root.addRenderBucket(Alignment.TOP, contentPane);
     }
 
     @Override
@@ -189,12 +189,12 @@ public class GuiColorPicker extends GuiFactory implements Consumer<ButtonElement
     /**
      * Draws a rectangle with a horizontal color gradient.
      *
-     * @param left The distance to the left border of the GUI.
-     * @param top The distance to the top border of the GUI.
-     * @param right The distance to the right border of the GUI.
-     * @param bottom The distance to the bottom border of the GUI.
+     * @param left       The distance to the left border of the GUI.
+     * @param top        The distance to the top border of the GUI.
+     * @param right      The distance to the right border of the GUI.
+     * @param bottom     The distance to the bottom border of the GUI.
      * @param startColor The starting color of the gradient (left hand color).
-     * @param endColor The end color of the gradient (right hand color).
+     * @param endColor   The end color of the gradient (right hand color).
      */
     private void drawHorizontalGradientRect(final int left, final int top, final int right, final int bottom,
                                             final int startColor, final int endColor) {
@@ -219,7 +219,7 @@ public class GuiColorPicker extends GuiFactory implements Consumer<ButtonElement
 
         // Draw the gradient rect.
         final Tessellator tessellator = Tessellator.getInstance();
-        final VertexBuffer bufferbuilder = tessellator.getBuffer();
+        final BufferBuilder bufferbuilder = tessellator.getBuffer();
         bufferbuilder.begin(GL11.GL_QUADS, DefaultVertexFormats.POSITION_COLOR);
         bufferbuilder.pos((double) right, (double) top, (double) zLevel)
                 .color(endRed, endGreen, endBlue, endAlpha).endVertex();
