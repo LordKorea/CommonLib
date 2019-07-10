@@ -32,14 +32,13 @@ public class Button extends BaseElement {
     /**
      * Constructor.
      *
-     * @param id               The id of this button.
      * @param buttonListener   The listener that will react to button clicks.
      * @param renderProperties The render properties of this button.
      */
-    public Button(final int id, final Consumer<Button> buttonListener, final RenderProperties renderProperties) {
+    public Button(final Consumer<Button> buttonListener, final RenderProperties renderProperties) {
         super(renderProperties);
         this.buttonListener = buttonListener;
-        button = new GuiButton(id, 0, 0, 0, 0, "");
+        button = new GuiButton(-1, 0, 0, 0, 0, "");
     }
 
     @Override
@@ -48,6 +47,7 @@ public class Button extends BaseElement {
         ctx.getMinecraftButtonRegistration().accept(button);
         ctx.getButtonRegistration().accept(this);
 
+        button.id = ctx.getButtonIdSupplier().getAsInt();
         button.x = positionX;
         button.y = positionY;
         button.width = width;
