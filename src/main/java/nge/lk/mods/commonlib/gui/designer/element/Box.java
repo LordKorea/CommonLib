@@ -25,6 +25,11 @@ public class Box extends BaseElement {
     private final List<RenderBucket> renderBuckets = new ArrayList<>();
 
     /**
+     * The actively edited render bucket.
+     */
+    private final List<Element> activeBucket = new ArrayList<>();
+
+    /**
      * The padding of this box.
      */
     private final Padding padding;
@@ -104,6 +109,9 @@ public class Box extends BaseElement {
                     final int effectiveHeight = requestedSize.getHeight().evaluate(paddingClearedHeight);
                     element.setWidth(effectiveWidth);
                     element.setHeight(effectiveHeight);
+
+                    // Totals are incorrect if not in the dimension of the secondary alignment. However, this is not a
+                    // problem, as totals are only used in the dimension of the secondary alignment.
                     totalWidth += effectiveWidth;
                     totalHeight += effectiveHeight;
 
@@ -143,6 +151,14 @@ public class Box extends BaseElement {
                     element.setPositionY(pickAlignmentDimension(primaryAlignment, secondaryCursors[cursorIdx],
                             primaryCursor));
 
+                    // Process alignment corrections.
+                    if (primaryAlignment == Alignment.RIGHT || secondaryAlignment == Alignment.RIGHT) {
+                        element.setPositionX(element.getPositionX() - effectiveWidth);
+                    }
+                    if (primaryAlignment == Alignment.BOTTOM || secondaryAlignment == Alignment.BOTTOM) {
+                        element.setPositionY(element.getPositionY() - effectiveHeight);
+                    }
+
                     // The element is positioned, and can now be prepared for rendering itself.
                     element.prepareRender(ctx);
 
@@ -175,6 +191,25 @@ public class Box extends BaseElement {
      */
     public void addRenderBucket(final Alignment alignment, final Element... elements) {
         addRenderBucket(alignment, Arrays.asList(elements));
+    }
+
+    /**
+     * Adds an element to the actively edited render bucket.
+     *
+     * @param element The element.
+     */
+    public void addToActive(final Element element) {
+        activeBucket.add(element);
+    }
+
+    /**
+     * Commits the actively edited render bucket.
+     *
+     * @param alignment The alignment to commit the bucket with.
+     */
+    public void commitBucket(final Alignment alignment) {
+        addRenderBucket(alignment, activeBucket);
+        activeBucket.clear();
     }
 
     /**
