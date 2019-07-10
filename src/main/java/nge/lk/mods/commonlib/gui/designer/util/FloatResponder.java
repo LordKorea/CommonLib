@@ -1,15 +1,13 @@
-package nge.lk.mods.commonlib.gui.factory;
+package nge.lk.mods.commonlib.gui.designer.util;
 
 import net.minecraft.client.gui.GuiPageButtonList;
 
 /**
- * A specialization of {@link GuiPageButtonList.GuiResponder} which only responds to float value
- * changes.
+ * A specialization of {@link net.minecraft.client.gui.GuiPageButtonList.GuiResponder} which only responds to float
+ * value changes.
  *
- * @see GuiPageButtonList.GuiResponder
- * @deprecated Use {@link nge.lk.mods.commonlib.gui.designer}
+ * @see net.minecraft.client.gui.GuiPageButtonList.GuiResponder
  */
-@Deprecated
 @FunctionalInterface
 public interface FloatResponder extends GuiPageButtonList.GuiResponder {
 

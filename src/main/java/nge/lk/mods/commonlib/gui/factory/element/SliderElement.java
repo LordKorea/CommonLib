@@ -12,7 +12,9 @@ import java.util.function.BiFunction;
  * Represents a slider input.
  *
  * @see GuiSlider
+ * @deprecated Use {@link nge.lk.mods.commonlib.gui.designer}
  */
+@Deprecated
 @Getter
 public class SliderElement extends BaseElement {
 
@@ -24,12 +26,12 @@ public class SliderElement extends BaseElement {
     /**
      * Constructor.
      *
-     * @param min The minimum possible value of the slider.
-     * @param max The maximum possible value of the slider.
+     * @param min          The minimum possible value of the slider.
+     * @param max          The maximum possible value of the slider.
      * @param defaultValue The default value of the slider.
-     * @param formatter The formatter for the slider caption: {@code (Element, Value) -> String}.
-     * @param responder The responder to slider value changes.
-     * @param positioning The positioning of this element.
+     * @param formatter    The formatter for the slider caption: {@code (Element, Value) -> String}.
+     * @param responder    The responder to slider value changes.
+     * @param positioning  The positioning of this element.
      */
     public SliderElement(final float min, final float max, final float defaultValue,
                          final BiFunction<SliderElement, Float, String> formatter,

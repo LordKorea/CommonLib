@@ -10,7 +10,9 @@ import nge.lk.mods.commonlib.gui.factory.Positioning;
  * Represents a text element.
  *
  * @see FontRenderer
+ * @deprecated Use {@link nge.lk.mods.commonlib.gui.designer}
  */
+@Deprecated
 @Getter
 @Setter
 public class TextElement extends BaseElement {
@@ -41,7 +43,7 @@ public class TextElement extends BaseElement {
      * Combined setter for caption and color.
      *
      * @param caption The new caption.
-     * @param color The new color.
+     * @param color   The new color.
      */
     public void setText(final String caption, final int color) {
         setCaption(caption);

@@ -9,7 +9,9 @@ import nge.lk.mods.commonlib.gui.factory.Positioning;
  * Represents a text input field.
  *
  * @see GuiTextField
+ * @deprecated Use {@link nge.lk.mods.commonlib.gui.designer}
  */
+@Deprecated
 @Getter
 public class InputElement extends BaseElement {
 

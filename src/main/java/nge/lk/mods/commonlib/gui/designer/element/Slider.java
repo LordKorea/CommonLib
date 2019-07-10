@@ -3,7 +3,7 @@ package nge.lk.mods.commonlib.gui.designer.element;
 import net.minecraft.client.gui.GuiSlider;
 import nge.lk.mods.commonlib.gui.designer.RenderContext;
 import nge.lk.mods.commonlib.gui.designer.RenderProperties;
-import nge.lk.mods.commonlib.gui.factory.FloatResponder;
+import nge.lk.mods.commonlib.gui.designer.util.FloatResponder;
 
 import java.util.function.BiConsumer;
 import java.util.function.BiFunction;
