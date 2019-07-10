@@ -12,7 +12,9 @@ import java.util.function.Consumer;
  * Represents a button element.
  *
  * @see GuiButton
+ * @deprecated Use {@link nge.lk.mods.commonlib.gui.designer}
  */
+@Deprecated
 @Getter
 public class ButtonElement extends BaseElement {
 
@@ -35,9 +37,9 @@ public class ButtonElement extends BaseElement {
     /**
      * Constructor.
      *
-     * @param id The id of this button.
+     * @param id             The id of this button.
      * @param buttonListener The listener that will react to button clicks.
-     * @param positioning The positioning of this element.
+     * @param positioning    The positioning of this element.
      */
     public ButtonElement(final int id, final Consumer<ButtonElement> buttonListener, final Positioning positioning) {
         super(positioning, 3, 5);

@@ -7,7 +7,9 @@ import net.minecraft.client.gui.GuiPageButtonList;
  * changes.
  *
  * @see GuiPageButtonList.GuiResponder
+ * @deprecated Use {@link nge.lk.mods.commonlib.gui.designer}
  */
+@Deprecated
 @FunctionalInterface
 public interface FloatResponder extends GuiPageButtonList.GuiResponder {
 

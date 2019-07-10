@@ -5,7 +5,10 @@ import lombok.NoArgsConstructor;
 
 /**
  * Represents the position of an element in a GUI.
+ *
+ * @deprecated Use {@link nge.lk.mods.commonlib.gui.designer}
  */
+@Deprecated
 @NoArgsConstructor
 public class Positioning {
 
