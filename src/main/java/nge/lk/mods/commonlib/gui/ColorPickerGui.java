@@ -128,18 +128,14 @@ public class ColorPickerGui extends GuiDesigner {
 
     @Override
     protected void createGui() {
-        final Box contentPane = new Box(RenderProperties.builder().fullSize().build(),
+        final Box contentPane = new Box(RenderProperties.fullSize(),
                 Padding.relative(10, 5, 20, 5));
+        contentPane.addRenderBucket(Alignment.TOP, Label.centered("Color Picker", 0xAAAAAA));
 
-        final Label label = new Label(RenderProperties.builder().centered().groupBreaking().build());
-        label.setText("Color Picker", 0xAAAAAA);
-        label.pack();
-        contentPane.addRenderBucket(Alignment.TOP, label);
-
-        final Button button = new Button(b -> closeGui(), RenderProperties.builder().relativeWidth(30).centered()
-                .absoluteHeight(20).build());
-        contentPane.addRenderBucket(Alignment.BOTTOM, button);
+        final Button button = new Button(b -> closeGui(),
+                Button.relativeProperties(30, true, true));
         button.getButton().displayString = "Choose Color";
+        contentPane.addRenderBucket(Alignment.BOTTOM, button);
 
         root.addRenderBucket(Alignment.TOP, contentPane);
     }

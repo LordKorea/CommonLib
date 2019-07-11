@@ -53,6 +53,54 @@ public class Label extends BaseElement {
     }
 
     /**
+     * Creates a label which is not group breaking. The secondary alignment defaults to
+     * {@link nge.lk.mods.commonlib.gui.designer.util.Alignment#LEFT}.
+     *
+     * @param caption The label caption.
+     * @param color   The label color.
+     * @return The label.
+     */
+    public static Label regular(final String caption, final int color) {
+        return regular(caption, color, false, Alignment.LEFT);
+    }
+
+    /**
+     * Creates a label. The secondary alignment defaults to
+     * {@link nge.lk.mods.commonlib.gui.designer.util.Alignment#LEFT}.
+     *
+     * @param caption       The label caption.
+     * @param color         The label color.
+     * @param groupBreaking Whether the label breaks the current group.
+     * @return The label.
+     */
+    public static Label regular(final String caption, final int color, final boolean groupBreaking) {
+        return regular(caption, color, groupBreaking, Alignment.LEFT);
+    }
+
+    /**
+     * Creates a label.
+     *
+     * @param caption            The label caption.
+     * @param color              The label color.
+     * @param groupBreaking      Whether the label breaks the current group.
+     * @param secondaryAlignment The secondary alignment.
+     * @return The label.
+     */
+    public static Label regular(final String caption, final int color, final boolean groupBreaking,
+                                final Alignment secondaryAlignment) {
+        final RenderProperties.RenderPropertiesBuilder builder = RenderProperties.builder()
+                .secondaryAlignment(secondaryAlignment);
+        if (groupBreaking) {
+            builder.groupBreaking();
+        }
+
+        final Label label = new Label(builder.build());
+        label.setText(caption, color);
+        label.pack();
+        return label;
+    }
+
+    /**
      * Constructor.
      *
      * @param renderProperties The render properties of this label.
