@@ -58,6 +58,9 @@ public abstract class GuiDesigner extends GuiScreen {
     public void initGui() {
         // Clear GuiScreen's button list.
         buttonList.clear();
+        buttons.clear();
+        labels.clear();
+        textFields.clear();
 
         // Prepare the root box and all its children for rendering.
         final RenderContext ctx = new RenderContext(buttonList::add, buttons::add, labels::add, textFields::add,
