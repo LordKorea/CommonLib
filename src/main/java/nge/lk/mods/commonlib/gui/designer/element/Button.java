@@ -5,6 +5,7 @@ import lombok.Setter;
 import net.minecraft.client.gui.GuiButton;
 import nge.lk.mods.commonlib.gui.designer.RenderContext;
 import nge.lk.mods.commonlib.gui.designer.RenderProperties;
+import nge.lk.mods.commonlib.gui.designer.util.Alignment;
 
 import java.util.function.Consumer;
 
@@ -60,8 +61,22 @@ public class Button extends BaseElement {
      */
     public static RenderProperties relativeProperties(final int width, final boolean groupBreaking,
                                                       final boolean centered) {
+        return relativeProperties(width, groupBreaking, centered, Alignment.LEFT);
+    }
+
+    /**
+     * Creates render properties for a button with relative width.
+     *
+     * @param width         The width.
+     * @param groupBreaking Whether the button is render group breaking.
+     * @param centered      Whether the button is centered.
+     * @param secondaryAlignment The secondary alignment of the button.
+     * @return The render properties.
+     */
+    public static RenderProperties relativeProperties(final int width, final boolean groupBreaking,
+                                                      final boolean centered, final Alignment secondaryAlignment) {
         final RenderProperties.RenderPropertiesBuilder builder = RenderProperties.builder().relativeWidth(width)
-                .absoluteHeight(20);
+                .absoluteHeight(20).secondaryAlignment(secondaryAlignment);
         if (groupBreaking) {
             builder.groupBreaking();
         }
