@@ -2,7 +2,6 @@ package nge.lk.mods.commonlib.gui.designer;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
-import lombok.RequiredArgsConstructor;
 import lombok.Setter;
 import nge.lk.mods.commonlib.gui.designer.util.Alignment;
 import nge.lk.mods.commonlib.gui.designer.util.Dimension;
@@ -42,6 +41,15 @@ public class RenderProperties {
      */
     public static RenderPropertiesBuilder builder() {
         return new RenderPropertiesBuilder();
+    }
+
+    /**
+     * Returns render properties that request the full available size.
+     *
+     * @return The render properties.
+     */
+    public static RenderProperties fullSize() {
+        return builder().fullSize().build();
     }
 
     /**

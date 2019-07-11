@@ -35,6 +35,86 @@ public class Box extends BaseElement {
     private final Padding padding;
 
     /**
+     * Creates a relatively spaced vertical spacer which is group breaking.
+     *
+     * @param height The height of the spacer.
+     * @return The created spacer.
+     */
+    public static Box relativeVerticalSpacer(final int height) {
+        return new Box(RenderProperties.builder().groupBreaking().relativeHeight(height).build());
+    }
+
+    /**
+     * Creates a relatively spaced vertical spacer.
+     *
+     * @param height The height of the spacer.
+     * @return The created spacer.
+     */
+    public static Box relativeVerticalPlaceholder(final int height) {
+        return new Box(RenderProperties.builder().relativeHeight(height).build());
+    }
+
+    /**
+     * Creates a absolutely spaced vertical spacer which is group breaking.
+     *
+     * @param height The height of the spacer.
+     * @return The created spacer.
+     */
+    public static Box absoluteVerticalSpacer(final int height) {
+        return new Box(RenderProperties.builder().groupBreaking().absoluteHeight(height).build());
+    }
+
+    /**
+     * Creates a absolutely spaced vertical spacer.
+     *
+     * @param height The height of the spacer.
+     * @return The created spacer.
+     */
+    public static Box absoluteVerticalPlaceholder(final int height) {
+        return new Box(RenderProperties.builder().absoluteHeight(height).build());
+    }
+
+    /**
+     * Creates a relatively spaced horizontal spacer which is group breaking.
+     *
+     * @param width The width of the spacer.
+     * @return The created spacer.
+     */
+    public static Box relativeHorizontalSpacer(final int width) {
+        return new Box(RenderProperties.builder().groupBreaking().relativeWidth(width).build());
+    }
+
+    /**
+     * Creates a relatively spaced horizontal spacer.
+     *
+     * @param width The width of the spacer.
+     * @return The created spacer.
+     */
+    public static Box relativeHorizontalPlaceholder(final int width) {
+        return new Box(RenderProperties.builder().relativeWidth(width).build());
+    }
+
+    /**
+     * Creates a absolutely spaced horizontal spacer which is group breaking.
+     *
+     * @param width The width of the spacer.
+     * @return The created spacer.
+     */
+    public static Box absoluteHorizontalSpacer(final int width) {
+        return new Box(RenderProperties.builder().groupBreaking().absoluteWidth(width).build());
+    }
+
+    /**
+     * Creates a absolutely spaced horizontal spacer.
+     *
+     * @param width The width of the spacer.
+     * @return The created spacer.
+     */
+    public static Box absoluteHorizontalPlaceholder(final int width) {
+        return new Box(RenderProperties.builder().absoluteWidth(width).build());
+    }
+
+    /**
      * Constructor.
      *
      * @param renderProperties The requested render properties for the box.
