@@ -30,6 +30,48 @@ public class Button extends BaseElement {
     private @Getter @Setter Object metadata;
 
     /**
+     * Creates render properties for a button with relative width.
+     *
+     * @param width The width.
+     * @return The render properties.
+     */
+    public static RenderProperties relativeProperties(final int width) {
+        return relativeProperties(width, false, false);
+    }
+
+    /**
+     * Creates render properties for a button with relative width.
+     *
+     * @param width         The width.
+     * @param groupBreaking Whether the button is render group breaking.
+     * @return The render properties.
+     */
+    public static RenderProperties relativeProperties(final int width, final boolean groupBreaking) {
+        return relativeProperties(width, groupBreaking, false);
+    }
+
+    /**
+     * Creates render properties for a button with relative width.
+     *
+     * @param width         The width.
+     * @param groupBreaking Whether the button is render group breaking.
+     * @param centered      Whether the button is centered.
+     * @return The render properties.
+     */
+    public static RenderProperties relativeProperties(final int width, final boolean groupBreaking,
+                                                      final boolean centered) {
+        final RenderProperties.RenderPropertiesBuilder builder = RenderProperties.builder().relativeWidth(width)
+                .absoluteHeight(20);
+        if (groupBreaking) {
+            builder.groupBreaking();
+        }
+        if (centered) {
+            builder.centered();
+        }
+        return builder.build();
+    }
+
+    /**
      * Constructor.
      *
      * @param buttonListener   The listener that will react to button clicks.
