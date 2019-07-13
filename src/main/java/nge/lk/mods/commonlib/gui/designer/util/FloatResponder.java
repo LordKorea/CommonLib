@@ -12,12 +12,12 @@ import net.minecraft.client.gui.GuiPageButtonList;
 public interface FloatResponder extends GuiPageButtonList.GuiResponder {
 
     @Override
-    default void setEntryValue(final int id, final boolean value) {
+    default void func_175321_a(final int id, final boolean value) {
         throw new UnsupportedOperationException("float responder can not accept boolean values");
     }
 
     @Override
-    default void setEntryValue(final int id, final String value) {
+    default void func_175319_a(final int id, final String value) {
         throw new UnsupportedOperationException("float responder can not accept string values");
     }
 }
