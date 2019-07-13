@@ -106,8 +106,8 @@ public class Button extends BaseElement {
         ctx.getMinecraftButtonRegistration().accept(button);
         ctx.getButtonRegistration().accept(this);
 
-        button.x = positionX;
-        button.y = positionY;
+        button.xPosition = positionX;
+        button.yPosition = positionY;
         button.width = width;
         button.height = height;
     }

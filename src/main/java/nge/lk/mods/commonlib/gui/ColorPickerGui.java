@@ -1,9 +1,9 @@
 package nge.lk.mods.commonlib.gui;
 
 import net.minecraft.client.gui.GuiScreen;
-import net.minecraft.client.renderer.BufferBuilder;
 import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.client.renderer.Tessellator;
+import net.minecraft.client.renderer.VertexBuffer;
 import net.minecraft.client.renderer.vertex.DefaultVertexFormats;
 import net.minecraft.util.ResourceLocation;
 import nge.lk.mods.commonlib.gui.designer.GuiDesigner;
@@ -78,16 +78,16 @@ public class ColorPickerGui extends GuiDesigner {
 
         // Draw the HSV labels, each label 25 pixels apart from each other, this is also the distance between the
         // HSV selectors.
-        fontRenderer.drawString("Hue",
-                (width - 256) / 2 - fontRenderer.getStringWidth("Hue") - 10,
+        fontRendererObj.drawString("Hue",
+                (width - 256) / 2 - fontRendererObj.getStringWidth("Hue") - 10,
                 height / 4 + 6,
                 0xA0A0A0);
-        fontRenderer.drawString("Saturation",
-                (width - 256) / 2 - fontRenderer.getStringWidth("Saturation") - 10,
+        fontRendererObj.drawString("Saturation",
+                (width - 256) / 2 - fontRendererObj.getStringWidth("Saturation") - 10,
                 height / 4 + 31,
                 0xA0A0A0);
-        fontRenderer.drawString("Value",
-                (width - 256) / 2 - fontRenderer.getStringWidth("Value") - 10,
+        fontRendererObj.drawString("Value",
+                (width - 256) / 2 - fontRendererObj.getStringWidth("Value") - 10,
                 height / 4 + 56,
                 0xA0A0A0);
 
@@ -215,7 +215,7 @@ public class ColorPickerGui extends GuiDesigner {
 
         // Draw the gradient rect.
         final Tessellator tessellator = Tessellator.getInstance();
-        final BufferBuilder bufferbuilder = tessellator.getBuffer();
+        final VertexBuffer bufferbuilder = tessellator.getBuffer();
         bufferbuilder.begin(GL11.GL_QUADS, DefaultVertexFormats.POSITION_COLOR);
         bufferbuilder.pos((double) right, (double) top, (double) zLevel)
                 .color(endRed, endGreen, endBlue, endAlpha).endVertex();

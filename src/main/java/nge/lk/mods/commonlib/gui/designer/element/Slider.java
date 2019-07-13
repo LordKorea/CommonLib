@@ -41,8 +41,8 @@ public class Slider extends BaseElement {
         super.prepareRender(ctx);
         ctx.getMinecraftButtonRegistration().accept(slider);
 
-        slider.x = positionX;
-        slider.y = positionY;
+        slider.xPosition = positionX;
+        slider.yPosition = positionY;
         slider.width = width;
         slider.height = height;
     }

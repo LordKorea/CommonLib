@@ -124,7 +124,7 @@ public class Label extends BaseElement {
      * Recalculates the width and height to fit the caption size.
      */
     public void pack() {
-        final int width = Minecraft.getMinecraft().fontRenderer.getStringWidth(caption);
+        final int width = Minecraft.getMinecraft().fontRendererObj.getStringWidth(caption);
         renderProperties.setRequestedSize(new RequestedSize(Dimension.absolute(width), Dimension.absolute(10)));
     }
 

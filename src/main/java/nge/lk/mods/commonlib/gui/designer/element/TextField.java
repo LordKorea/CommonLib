@@ -65,7 +65,7 @@ public class TextField extends BaseElement {
      */
     public TextField(final RenderProperties renderProperties) {
         super(renderProperties);
-        textField = new GuiTextField(0, Minecraft.getMinecraft().fontRenderer, 0, 0, 0,
+        textField = new GuiTextField(0, Minecraft.getMinecraft().fontRendererObj, 0, 0, 0,
                 0);
     }
 
@@ -74,8 +74,8 @@ public class TextField extends BaseElement {
         super.prepareRender(ctx);
         ctx.getTextFieldRegistration().accept(this);
 
-        textField.x = positionX;
-        textField.y = positionY;
+        textField.xPosition = positionX;
+        textField.yPosition = positionY;
         textField.width = width;
         textField.height = height;
     }
