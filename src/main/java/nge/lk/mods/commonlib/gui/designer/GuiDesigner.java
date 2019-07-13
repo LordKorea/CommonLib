@@ -45,7 +45,8 @@ public abstract class GuiDesigner extends GuiScreen {
         drawDefaultBackground();
 
         // Draw the labels in this GUI.
-        labels.forEach(l -> drawString(fontRenderer, l.getCaption(), l.getPositionX(), l.getPositionY(), l.getColor()));
+        labels.forEach(l -> drawString(fontRendererObj, l.getCaption(), l.getPositionX(), l.getPositionY(),
+                l.getColor()));
 
         // Draw the input elements.
         textFields.forEach(t -> t.getTextField().drawTextBox());
