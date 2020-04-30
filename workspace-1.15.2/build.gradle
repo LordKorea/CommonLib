@@ -1,0 +1,51 @@
+buildscript {
+    repositories {
+        maven { url = 'https://files.minecraftforge.net/maven' }
+        jcenter()
+        mavenCentral()
+    }
+    dependencies {
+        classpath group: 'net.minecraftforge.gradle', name: 'ForgeGradle', version: '3.+', changing: true
+    }
+}
+
+plugins {
+    id "io.franzbecker.gradle-lombok" version '3.3.0'
+}
+
+apply plugin: 'net.minecraftforge.gradle'
+apply plugin: 'eclipse'
+apply plugin: 'maven-publish'
+
+version = "2.0.0-1.15.2-31.1.41"
+group = "de.floorisjava.commonlib"
+archivesBaseName = "commonlib"
+
+sourceCompatibility = targetCompatibility = compileJava.sourceCompatibility = compileJava.targetCompatibility = '1.8' // Need this here so eclipse task generates correctly.
+
+minecraft {
+    mappings channel: 'snapshot', version: '20200225-1.15.1'
+}
+
+dependencies {
+    minecraft 'net.minecraftforge:forge:1.15.2-31.1.41'
+}
+
+jar.finalizedBy('reobfJar')
+
+publishing {
+    publications {
+        mavenJava(MavenPublication) {
+            from components.java
+
+            groupId "de.floorisjava.commonlib"
+            artifactId "commonlib"
+            version "2.0.0-1.15.2-31.1.41"
+        }
+    }
+    repositories {
+        maven {
+            url "file:///${project.projectDir}/mcmodsrepo"
+        }
+    }
+}
